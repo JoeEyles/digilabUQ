@@ -23,7 +23,12 @@ class UQModel:
         self._calibration_errors = np.sort(self._calibration_errors, descending=False)
         self._calibrated = True
 
-    def get_prediction_bound(self, percentile):
+    def predict(self, X):
+        if not self._fitted:
+            raise NotFittedError()
+        return self._model.predict(X)
+
+    def _get_prediction_bound(self, percentile):
         if not self._calibrated:
             raise NotCalibratedError()
         if percentile < 0 or percentile > 100:
@@ -32,17 +37,12 @@ class UQModel:
         n = len(self._calibration_errors)
         k = np.ceil((n+1)*(1-alpha)) - 1  # minus 1 for 0-indexed array
         return self._calibration_errors[int(k)]
-
-    def predict(self, X):
-        if not self._fitted:
-            raise NotFittedError()
-        return self._model.predict(X)
-
-    def predict_in_interval(self, X, percentile):
+    
+    def predict_with_interval(self, X, percentile):
         if not self._fitted:
             raise NotFittedError()
         if not self._calibrated:
             raise NotCalibratedError()
         prediction = self.predict(X)
-        bound = self.get_prediction_bound(percentile)
+        bound = self._get_prediction_bound(percentile)
         return [prediction - bound, prediction + bound]
