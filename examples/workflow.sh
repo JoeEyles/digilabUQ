@@ -11,5 +11,5 @@ conda activate digilab
 echo "Runtime environment activated"
 
 # Execute python script
-uq --coverage-percentile 50
+uq --coverage-percentile 50 --data-path "TODO"
 echo "Uncertainty quantification completed"
