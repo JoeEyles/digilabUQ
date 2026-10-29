@@ -19,7 +19,7 @@ pip install .
 
 ## Usage
 
-Use the `UQModel` class as if it were a scikit-learn model with an additional `predict_with_interval()` function. This function takes input data `X` and a target coverage percentile and returns intervals as a list of lists. For example:
+Use the `UQModel` class as if it were a scikit-learn model with additional `calibrate()` and `predict_with_interval()` function. The `calibrate()` function takes input data `X` and target data `y` and performs an internal calibration. The `predict_with_interval()` function takes input data `X` and a target coverage percentile and returns intervals as a list of lists. For example:
 
 ```python
     # Import the uncertainty quantification class

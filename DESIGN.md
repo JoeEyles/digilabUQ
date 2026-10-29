@@ -8,6 +8,7 @@ This is probably ideal for the scientist user, who might not have to do anything
 
 - Add type hints to the Python code.
 - Add docstrings to the Python code.
+- Improve the README documentation, ideally including some information about the algorithm.
 - Extend the scikit-learn classes `BaseEstimator` and `RegressorMixin`. Then I might be able to simplify the class by removing the `fit()` and `predict()` 
 functions.
 - Build a better interface for the CLI interface. E.g.
