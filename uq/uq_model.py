@@ -43,6 +43,7 @@ class UQModel:
             raise NotFittedError()
         if not self._calibrated:
             raise NotCalibratedError()
-        prediction = self.predict(X)
+        predictions = self.predict(X)
         bound = self._get_prediction_bound(percentile)
-        return [prediction - bound, prediction + bound]
+
+        return [[prediction - bound, prediction + bound] for prediction in predictions]
